@@ -135,6 +135,15 @@ public class RentalResourceTest {
                 .body("size()", equalTo(3));
 
     }
+    @Test
+    public void testGetAllRentalsFailure() throws Exception {
+        given()
+                .contentType("application/json")
+                .get("/rental/al").then()
+                .assertThat()
+                .statusCode(HttpStatus.NOT_FOUND_404.getStatusCode());
+
+    }
 
     @Test
     public void addTenant() {

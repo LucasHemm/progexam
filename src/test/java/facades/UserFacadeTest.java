@@ -98,6 +98,12 @@ public class UserFacadeTest {
     }
 
 
+    //this tests the getUser method
+    @Test
+    public void getUser() {
+        UserDTO user = facade.getUser(u1.getUserName());
+        Assertions.assertEquals(u1.getUserName(), user.getUserName());
+    }
 
 
 
