@@ -105,6 +105,15 @@ public class RentalResource {
         return Response.ok().entity(updatedRentalDTO).build();
     }
 
+    @DELETE
+    @Path("delete/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteRental(@PathParam("id") Long id){
+        FACADE.deleteRental(id);
+        return Response.ok().build();
+    }
+
 
 
 

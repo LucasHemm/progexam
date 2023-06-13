@@ -205,6 +205,15 @@ public class RentalResourceTest {
                 .body("contactPerson", equalTo("mark"));
     }
 
+    @Test
+    public void testDeleteRental() throws Exception {
+        given()
+                .contentType("application/json")
+                .delete("/rental/delete/"+r1.getId()).then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode());
+    }
+
 
 
 //    @Test

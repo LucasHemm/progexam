@@ -156,7 +156,17 @@ public class RentalFacade {
     }
 
 
-
-
-
+    public void deleteRental(Long id) {
+        EntityManager em = getEntityManager();
+        Rental rental = em.find(Rental.class, id);
+        House house = em.find(House.class, rental.getHouse().getId());
+        try {
+            em.getTransaction().begin();
+            em.remove(house);
+            em.remove(rental);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
 }
