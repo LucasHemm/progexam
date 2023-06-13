@@ -122,4 +122,18 @@ public class Rental {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Rental{" +
+                "id=" + id +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", priceAnnual=" + priceAnnual +
+                ", deposit=" + deposit +
+                ", contactPerson='" + contactPerson + '\'' +
+                ", users=" + users +
+                ", house=" + house +
+                '}';
+    }
 }

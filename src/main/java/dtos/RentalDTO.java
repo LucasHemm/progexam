@@ -1,8 +1,11 @@
 package dtos;
 
+import entities.House;
 import entities.Rental;
 import entities.User;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,7 +18,7 @@ public class RentalDTO {
     private int deposit;
     private String contactPerson;
     private HouseDTO houseDTO;
-    private Set<UserDTO> userDTOs;
+    private Set<String> userDTOs = new HashSet<>();
 
     public RentalDTO() {
     }
@@ -27,7 +30,9 @@ public class RentalDTO {
         this.deposit = deposit;
         this.contactPerson = contactPerson;
         this.houseDTO = houseDTO;
-        this.userDTOs = userDTOs;
+        for(UserDTO userDTO : userDTOs){
+            this.userDTOs.add(userDTO.getUserName());
+        }
     }
     public RentalDTO(Rental rental) {
         this.startDate = rental.getStartDate();
@@ -35,13 +40,24 @@ public class RentalDTO {
         this.priceAnnual = rental.getPriceAnnual();
         this.deposit = rental.getDeposit();
         this.contactPerson = rental.getContactPerson();
-        HouseDTO houseDTO = new HouseDTO(rental.getHouse());
-        this.houseDTO = houseDTO;
-        this.userDTOs = userDTOs;
+        this.houseDTO = new HouseDTO(rental.getHouse());
+        for(User user : rental.getUsers()){
+            this.userDTOs.add(user.getUserName());
+        }
     }
 
+    //    public static List<RentalDTO> getDtos(List<Rental> rentals) {
+//        return rentals.stream().map(r -> new RentalDTO(r.getStartDate(),r.getEndDate()r.getPriceAnnual()r.getDeposit()r.getContactPerson(),new HouseDTO(r.getHouse(),r.get)).collect(Collectors.toList());
+//    }
     public static List<RentalDTO> getDtos(List<Rental> rentals) {
-        return rentals.stream().map(r -> new RentalDTO(r)).collect(Collectors.toList());
+        List<RentalDTO> rentalDTOs = new ArrayList<>();
+        for (Rental rental: rentals) {
+            HouseDTO houseDTO = new HouseDTO(rental.getHouse());
+            Set<UserDTO> userDTOs = rental.getUsers().stream().map(u -> new UserDTO(u)).collect(Collectors.toSet());
+            RentalDTO rentalDTO = new RentalDTO(rental.getStartDate(),rental.getEndDate(),rental.getPriceAnnual(),rental.getDeposit(),rental.getContactPerson(),houseDTO,userDTOs);
+            rentalDTOs.add(rentalDTO);
+        }
+        return rentalDTOs;
     }
 
     public String getStartDate() {
@@ -92,11 +108,32 @@ public class RentalDTO {
         this.houseDTO = houseDTO;
     }
 
-    public Set<UserDTO> getUserDTOs() {
+    public void setPriceAnnual(int priceAnnual) {
+        this.priceAnnual = priceAnnual;
+    }
+
+    public void setDeposit(int deposit) {
+        this.deposit = deposit;
+    }
+
+    public Set<String> getUserDTOs() {
         return userDTOs;
     }
 
-    public void setUserDTOs(Set<UserDTO> userDTOs) {
+    public void setUserDTOs(Set<String> userDTOs) {
         this.userDTOs = userDTOs;
+    }
+
+    @Override
+    public String toString() {
+        return "RentalDTO{" +
+                "startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", priceAnnual=" + priceAnnual +
+                ", deposit=" + deposit +
+                ", contactPerson='" + contactPerson + '\'' +
+                ", houseDTO=" + houseDTO +
+                ", userDTOs=" + userDTOs +
+                '}';
     }
 }

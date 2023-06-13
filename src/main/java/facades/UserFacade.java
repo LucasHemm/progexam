@@ -90,6 +90,7 @@ public class UserFacade {
     public UserDTO getUser(String username){
         EntityManager em = emf.createEntityManager();
         User user = em.find(User.class, username);
+        System.out.println( "suiii"+ user.getRentals());
         return new UserDTO(user);
     }
 

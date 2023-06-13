@@ -15,3 +15,5 @@ x-access-token:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiYWRtaW4iLCJl
 GET http://localhost:8080/groupstartcodebackend/api/joke
 ###
 GET http://localhost:8080/progexam/api/info/tenant/user
+###
+GET http://localhost:8080/progexam/api/rental/all

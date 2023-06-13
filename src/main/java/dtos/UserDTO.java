@@ -1,9 +1,12 @@
 package dtos;
 
+import entities.Rental;
 import entities.User;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class UserDTO {
@@ -14,6 +17,7 @@ public class UserDTO {
     private String name;
     private String phone;
     private String job;
+    private Set<RentalDTO> rentalDTOs = new HashSet<>();
 
     public UserDTO(User user) {
         this.userName = user.getUserName();
@@ -22,6 +26,11 @@ public class UserDTO {
         this.name = user.getName();
         this.phone = user.getPhone();
         this.job = user.getJob();
+        for(Rental rental: user.getRentals()){
+            RentalDTO rentalDTO = new RentalDTO(rental);
+            System.out.println("HEEEEEEEEEJ*****"+rentalDTO);
+            this.rentalDTOs.add(rentalDTO);
+        }
     }
 
     public String getName() {
@@ -76,4 +85,11 @@ public class UserDTO {
         this.roleList = roleList;
     }
 
+    public Set<RentalDTO> getRentalDTOs() {
+        return rentalDTOs;
+    }
+
+    public void setRentalDTOs(Set<RentalDTO> rentalDTOs) {
+        this.rentalDTOs = rentalDTOs;
+    }
 }

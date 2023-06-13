@@ -12,21 +12,19 @@ public class HouseDTO {
     private String address;
     private String city;
     private int numerOfRooms;
-    private List<RentalDTO> rentalDTOs;
 
-    public HouseDTO(String address, String city, int numerOfRooms, List<RentalDTO> rentalDTOs) {
+    public HouseDTO(String address, String city, int numerOfRooms) {
         this.address = address;
         this.city = city;
         this.numerOfRooms = numerOfRooms;
-        this.rentalDTOs = rentalDTOs;
+
     }
     public HouseDTO(House house) {
         this.address = house.getAddress();
         this.city = house.getCity();
         this.numerOfRooms = house.getNumberOfRooms();
-        List<Rental> rentalList = (List<Rental>) house.getRentals();
-        this.rentalDTOs = RentalDTO.getDtos(rentalList);
     }
+
 
     public String getAddress() {
         return address;
@@ -50,13 +48,5 @@ public class HouseDTO {
 
     public void setNumerOfRooms(int numerOfRooms) {
         this.numerOfRooms = numerOfRooms;
-    }
-
-    public List<RentalDTO> getRentalDTOs() {
-        return rentalDTOs;
-    }
-
-    public void setRentalDTOs(List<RentalDTO> rentalDTOs) {
-        this.rentalDTOs = rentalDTOs;
     }
 }

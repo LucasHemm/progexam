@@ -88,7 +88,7 @@ public class UserResourceTest {
         h2 = new House("lyngbyhovedgade", "Lyngby", 3);
 
         r1 = new Rental("15 maj", "20 dec", 100000, 15000, "hansi", h1);
-        r1 = new Rental("13 jan", "9 nov", 90000, 12500, "Peterski", h2);
+        r2 = new Rental("13 jan", "9 nov", 90000, 12500, "Peterski", h2);
         Set<Rental> rentals1 = new HashSet<>();
         rentals1.add(r1);
         Set<Rental> rentals2 = new HashSet<>();

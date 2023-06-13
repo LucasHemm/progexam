@@ -39,7 +39,7 @@ public class User implements Serializable {
   @Column(name = "job", nullable = false)
   private String job;
 
-  @ManyToMany(mappedBy = "users")
+  @ManyToMany(mappedBy = "users",fetch = FetchType.EAGER)
   private Set<Rental> rentals = new LinkedHashSet<>();
 
   public Set<Rental> getRentals() {
@@ -119,6 +119,18 @@ public class User implements Serializable {
     this.rentals = rentals;
   }
 
+  @Override
+  public String toString() {
+    return "User{" +
+            "userName='" + userName + '\'' +
+            ", userPass='" + userPass + '\'' +
+            ", roleList=" + roleList +
+            ", name='" + name + '\'' +
+            ", phone='" + phone + '\'' +
+            ", job='" + job + '\'' +
+            ", rentals=" + rentals +
+            '}';
+  }
 
   public String getUserName() {
     return userName;
