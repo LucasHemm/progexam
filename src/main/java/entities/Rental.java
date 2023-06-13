@@ -37,6 +37,20 @@ public class Rental {
     @JoinColumn(name = "house_id")
     private House house;
 
+
+    public Rental() {
+    }
+    public Rental(String startDate, String endDate, Integer priceAnnual, Integer deposit, String contactPerson, House house, Set<User> users) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.priceAnnual = priceAnnual;
+        this.deposit = deposit;
+        this.contactPerson = contactPerson;
+        this.house = house;
+        this.users = users;
+    }
+
+
     public House getHouse() {
         return house;
     }

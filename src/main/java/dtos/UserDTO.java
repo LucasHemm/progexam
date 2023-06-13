@@ -11,12 +11,41 @@ public class UserDTO {
     private String userName;
     private String userPass;
     private List<RoleDTO> roleList = new ArrayList<>();
+    private String name;
+    private String phone;
+    private String job;
 
-    public UserDTO(User user){
+    public UserDTO(User user) {
         this.userName = user.getUserName();
         this.userPass = user.getUserPass();
         this.roleList = user.getRoleList().stream().map(r -> new RoleDTO(r)).collect(Collectors.toList());
+        this.name = user.getName();
+        this.phone = user.getPhone();
+        this.job = user.getJob();
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
     }
 
     public static List<UserDTO> getDtos(List<User> persons) {
