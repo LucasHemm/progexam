@@ -43,6 +43,10 @@ public class UserResource {
     public Response allUsers() {
 
         List<UserDTO> userDTOS = FACADE.getAll();
+        for(UserDTO u : userDTOS){
+            u.setUserPass("********");
+        }
+
         return Response.ok().entity(userDTOS).build();
     }
 
