@@ -174,6 +174,36 @@ public class RentalResourceTest {
                 .body("userDTOs.size()", equalTo(0));
     }
 
+    @Test
+    public void updateAll(){
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.addProperty("id", r1.getId());
+        jsonObject.addProperty("startDate","1 jan");
+        jsonObject.addProperty("endDate", "2 jan");
+        jsonObject.addProperty("priceAnnual", 50000);
+        jsonObject.addProperty("deposit", 10000);
+        jsonObject.addProperty("contactPerson", "mark");
+
+
+
+        JsonObject houseDTO = new JsonObject();
+        houseDTO.addProperty("address", "århus hovedgade");
+        houseDTO.addProperty("city", "århus");
+        houseDTO.addProperty("numerOfRooms", "7");
+        jsonObject.add("houseDTO", houseDTO);
+
+        String requestBody = jsonObject.toString();
+
+        given()
+                .contentType("application/json")
+                .body(requestBody)
+                .put("/rental/update").then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                //make a .body that checks the size of the userDTOs equal to 1
+                .body("contactPerson", equalTo("mark"));
+    }
 
 
 

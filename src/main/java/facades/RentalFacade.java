@@ -119,4 +119,44 @@ public class RentalFacade {
         }
         return new RentalDTO(rental);
     }
+
+    public RentalDTO updateAll(RentalDTO rentalDTO,long id) {
+
+        EntityManager em = getEntityManager();
+        Rental rental = em.find(Rental.class, id);
+
+//        Set<User> newUserSet = new HashSet<>();
+//        for (String username : rentalDTO.getUserDTOs()) {
+//            User user = em.find(User.class, username);
+//        }
+
+        rental.setStartDate(rentalDTO.getStartDate());
+        rental.setEndDate(rentalDTO.getEndDate());
+        rental.setPriceAnnual(rentalDTO.getPriceAnnual());
+        rental.setDeposit(rentalDTO.getDeposit());
+        rental.setContactPerson(rentalDTO.getContactPerson());
+
+        HouseDTO houseDTO = rentalDTO.getHouseDTO();
+        Long houseId = rental.getHouse().getId();
+        House house = em.find(House.class, houseId);
+        house.setCity(houseDTO.getCity());
+        house.setAddress(houseDTO.getAddress());
+        house.setNumberOfRooms(houseDTO.getNumerOfRooms());
+
+
+        try{
+            em.getTransaction().begin();
+            em.merge(house);
+            em.merge(rental);
+            em.getTransaction().commit();
+        }finally {
+            em.close();
+        }
+        return new RentalDTO(rental);
+    }
+
+
+
+
+
 }

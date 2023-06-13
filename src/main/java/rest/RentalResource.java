@@ -87,6 +87,24 @@ public class RentalResource {
         return Response.ok().entity(switchedRentalDTO).build();
     }
 
+    @PUT
+    @Path("update")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateAll(String input){
+        RentalDTO rentalDTO = GSON.fromJson(input, RentalDTO.class);
+        System.out.println(rentalDTO);
+
+
+        JsonObject jsonObject = GSON.fromJson(input, JsonObject.class);
+
+        Long id = jsonObject.get("id").getAsLong();
+
+
+        RentalDTO updatedRentalDTO = FACADE.updateAll(rentalDTO,id);
+        return Response.ok().entity(updatedRentalDTO).build();
+    }
+
 
 
 
