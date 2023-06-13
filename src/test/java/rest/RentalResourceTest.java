@@ -165,6 +165,25 @@ public class RentalResourceTest {
     }
 
     @Test
+    public void addTenantFailure() {
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("newwTenant", "user");
+        jsonObject.addProperty("id", r3.getId());
+
+        String requestBody = jsonObject.toString();
+
+        given()
+                .contentType("application/json")
+                .body(requestBody)
+                .put("/rental/add").then()
+                .assertThat()
+                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR_500.getStatusCode());
+                //make a .body that checks the size of the userDTOs equal to 1
+    }
+
+
+    @Test
     public void removeTenant() {
 
         JsonObject jsonObject = new JsonObject();
@@ -179,8 +198,24 @@ public class RentalResourceTest {
                 .put("/rental/remove").then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                //make a .body that checks the size of the userDTOs equal to 1
                 .body("userDTOs.size()", equalTo(0));
+    }
+
+    @Test
+    public void removeTenantFailure() {
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("oldTenanttt", "user");
+        jsonObject.addProperty("id", r1.getId());
+
+        String requestBody = jsonObject.toString();
+
+        given()
+                .contentType("application/json")
+                .body(requestBody)
+                .put("/rental/remove").then()
+                .assertThat()
+                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR_500.getStatusCode());
     }
 
     @Test
