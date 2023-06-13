@@ -21,7 +21,7 @@ import java.util.List;
 
 @Path("rental")
 public class RentalResource {
-    
+
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final RentalFacade FACADE =  RentalFacade.getRentalFacade(EMF);
@@ -47,13 +47,18 @@ public class RentalResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createRental(String input){
 
+        System.out.println(input);
        HouseDTO houseDTO = GSON.fromJson(input, HouseDTO.class);
        UserDTO userDTO = GSON.fromJson(input, UserDTO.class);
        RentalDTO rentalDTO = GSON.fromJson(input,RentalDTO.class);
+        System.out.println(houseDTO);
+        System.out.println(userDTO);
+        System.out.println(rentalDTO);
 
 
         RentalDTO createdRentalDTO = FACADE.createRental(houseDTO, userDTO, rentalDTO);
-        return Response.ok().entity(rentalDTO).build();
+        System.out.println(createdRentalDTO);
+        return Response.ok().entity(createdRentalDTO).build();
     }
 
     @PUT

@@ -49,4 +49,13 @@ public class HouseDTO {
     public void setNumerOfRooms(int numerOfRooms) {
         this.numerOfRooms = numerOfRooms;
     }
+
+    @Override
+    public String toString() {
+        return "HouseDTO{" +
+                "address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", numerOfRooms=" + numerOfRooms +
+                '}';
+    }
 }

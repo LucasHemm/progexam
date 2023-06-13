@@ -40,8 +40,8 @@ public class RentalResourceTest {
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
     private static User u1, u2;
-    private static Rental r1, r2,r3;
-    private static House h1, h2,h3;
+    private static Rental r1, r2, r3;
+    private static House h1, h2, h3;
     List<Role> userList = new ArrayList<>();
 
 
@@ -137,7 +137,7 @@ public class RentalResourceTest {
     }
 
     @Test
-    public void addTenant(){
+    public void addTenant() {
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("newTenant", "user");
@@ -156,7 +156,7 @@ public class RentalResourceTest {
     }
 
     @Test
-    public void removeTenant(){
+    public void removeTenant() {
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("oldTenant", "user");
@@ -175,16 +175,15 @@ public class RentalResourceTest {
     }
 
     @Test
-    public void updateAll(){
+    public void updateAll() {
         JsonObject jsonObject = new JsonObject();
 
         jsonObject.addProperty("id", r1.getId());
-        jsonObject.addProperty("startDate","1 jan");
+        jsonObject.addProperty("startDate", "1 jan");
         jsonObject.addProperty("endDate", "2 jan");
         jsonObject.addProperty("priceAnnual", 50000);
         jsonObject.addProperty("deposit", 10000);
         jsonObject.addProperty("contactPerson", "mark");
-
 
 
         JsonObject houseDTO = new JsonObject();
@@ -209,16 +208,15 @@ public class RentalResourceTest {
     public void testDeleteRental() throws Exception {
         given()
                 .contentType("application/json")
-                .delete("/rental/delete/"+r1.getId()).then()
+                .delete("/rental/delete/" + r1.getId()).then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode());
     }
 
 
+    @Test
+    public void testCreateRental() {
 
-//    @Test
-//    public void testCreateRental() {
-//
 //        House house1 = new House("Hansensvej 12", "København", 5);
 //        Rental rental1 = new Rental("15 maj", "20 dec", 100000, 15000, "hansi", house1);
 //        Set<Rental> rentals1 = new HashSet<>();
@@ -230,20 +228,43 @@ public class RentalResourceTest {
 //        RentalDTO rentalDTO = new RentalDTO(rental1);
 //        HouseDTO houseDTO = new HouseDTO(house1);
 //        UserDTO userDTO = new UserDTO(user1);
-//
+
 //        String requestBody = new Gson().toJson(rentalDTO);
-//
-//
-//        given()
-//                .contentType(ContentType.JSON)
-//                .body(requestBody)
-//                .when()
-//                .post("/rental/create")
-//                .then()
-//                .statusCode(200)
-//                .contentType(ContentType.JSON)
-//                .body("userName", equalTo("johndoe"));
-//    }
+
+
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.addProperty("startDate", "1 jan");
+        jsonObject.addProperty("endDate", "2 jan");
+        jsonObject.addProperty("priceAnnual", 50000);
+        jsonObject.addProperty("deposit", 10000);
+        jsonObject.addProperty("contactPerson", "kenneth");
+
+
+        jsonObject.addProperty("address", "århus hovedgade");
+        jsonObject.addProperty("city", "århus");
+        jsonObject.addProperty("numerOfRooms", 7);
+
+        jsonObject.addProperty("userName", "johndoe");
+        jsonObject.addProperty("userPass", "123");
+        jsonObject.addProperty("name", "john");
+        jsonObject.addProperty("phone", "12345678");
+        jsonObject.addProperty("job", "skuespiller");
+
+
+        String requestBody = jsonObject.toString();
+
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(requestBody)
+                .when()
+                .post("/rental/create")
+                .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("contactPerson", equalTo("kenneth"));
+    }
 
 
 }
