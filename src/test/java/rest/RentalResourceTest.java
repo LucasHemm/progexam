@@ -216,22 +216,6 @@ public class RentalResourceTest {
 
     @Test
     public void testCreateRental() {
-
-//        House house1 = new House("Hansensvej 12", "København", 5);
-//        Rental rental1 = new Rental("15 maj", "20 dec", 100000, 15000, "hansi", house1);
-//        Set<Rental> rentals1 = new HashSet<>();
-//        rentals1.add(rental1);
-//        Role uRole = new Role("user");
-//        userList.add(uRole);
-//        User user1 = new User("user", "123", userList, "peter", "12345678", "kaptajn", rentals1);
-//
-//        RentalDTO rentalDTO = new RentalDTO(rental1);
-//        HouseDTO houseDTO = new HouseDTO(house1);
-//        UserDTO userDTO = new UserDTO(user1);
-
-//        String requestBody = new Gson().toJson(rentalDTO);
-
-
         JsonObject jsonObject = new JsonObject();
 
         jsonObject.addProperty("startDate", "1 jan");

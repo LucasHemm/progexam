@@ -31,6 +31,9 @@ public class UserDTO {
             this.rentalDTOs.add(rentalDTO);
         }
     }
+    public UserDTO(){
+
+    }
 
     public String getName() {
         return name;

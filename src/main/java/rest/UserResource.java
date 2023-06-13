@@ -36,7 +36,6 @@ public class UserResource {
         return "{\"msg\":\"Hello anonymous\"}";
     }
 
-    //Just to verify if the database is setup
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
@@ -50,42 +49,6 @@ public class UserResource {
         return Response.ok().entity(userDTOS).build();
     }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("user")
-    @RolesAllowed("user")
-    public String getFromUser() {
-        String thisuser = securityContext.getUserPrincipal().getName();
-        return "{\"msg\": \"Hello to User: " + thisuser + "\"}";
-    }
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("admin")
-    @RolesAllowed("admin")
-    public String getFromAdmin() {
-        String thisuser = securityContext.getUserPrincipal().getName();
-        return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
-    }
-
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("create")
-    public Response createUser(String input){
-        UserDTO udto = GSON.fromJson(input, UserDTO.class);
-        UserDTO udtoNew = FACADE.create(udto);
-        return Response.ok().entity(udtoNew).build();
-    }
-
-
-    @DELETE
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("delete/{username}")
-    public Response deleteUser(@PathParam("username") String username){
-        UserDTO udto = FACADE.delete(username);
-        return Response.ok().entity(udto).build();
-    }
 
     @GET
     @Consumes

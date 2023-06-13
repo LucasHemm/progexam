@@ -25,6 +25,8 @@ public class HouseDTO {
         this.numerOfRooms = house.getNumberOfRooms();
     }
 
+    public HouseDTO(){
+    }
 
     public String getAddress() {
         return address;

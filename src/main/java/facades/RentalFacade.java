@@ -50,10 +50,6 @@ public class RentalFacade {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Rental> query = em.createQuery("SELECT r FROM Rental r", Rental.class);
         List<Rental> rentals = query.getResultList();
-        System.out.println("siuuuuu"+rentals);
-        for (Rental rental : rentals) {
-            System.out.println(rental.getUsers());
-        }
         return RentalDTO.getDtos(rentals);
     }
 

@@ -127,42 +127,7 @@ public class UserResourceTest {
 
     }
 
-    //This method test tests the create user method in the UserResource class
-//    @Test
-//    public void testCreateUserEndpoint() {
-//
-//        List<Role> userList = new ArrayList<>();
-//        User u = new User("johndoe", "password",userList);
-//        System.out.println("*****************"+u+"*****************"+u.getRoleList());
-//        UserDTO userDTO = new UserDTO(u);
-//
-//        String requestBody = new Gson().toJson(userDTO);
-//
-//        given()
-//                .contentType(ContentType.JSON)
-//                .body(requestBody)
-//                .when()
-//                .post("/info/create")
-//                .then()
-//                .statusCode(200)
-//                .contentType(ContentType.JSON)
-//                .body("userName", equalTo("johndoe"));
-//    }
 
-    //This tests the delete user method in the UserResource class
-    @Test
-    public void testDeleteUserEndpoint() {
-        given()
-                .contentType(ContentType.JSON)
-                .when()
-                .delete("/info/delete/" + u1.getUserName())
-                .then()
-                .statusCode(200)
-                .contentType(ContentType.JSON)
-                .body("userName", equalTo("user"));
-    }
-
-    //this test gets the user by username
     @Test
     public void testGetUserByUsernameEndpoint() {
         given()
