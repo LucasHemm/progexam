@@ -28,7 +28,6 @@ public class UserDTO {
         this.job = user.getJob();
         for(Rental rental: user.getRentals()){
             RentalDTO rentalDTO = new RentalDTO(rental);
-            System.out.println("HEEEEEEEEEJ*****"+rentalDTO);
             this.rentalDTOs.add(rentalDTO);
         }
     }

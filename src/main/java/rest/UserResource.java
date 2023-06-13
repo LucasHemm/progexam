@@ -40,16 +40,10 @@ public class UserResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
-    public String allUsers() {
+    public Response allUsers() {
 
-        EntityManager em = EMF.createEntityManager();
-        try {
-            TypedQuery<User> query = em.createQuery ("select u from User u", User.class);
-            List<User> users = query.getResultList();
-            return "[" + users.size() + "]";
-        } finally {
-            em.close();
-        }
+        List<UserDTO> userDTOS = FACADE.getAll();
+        return Response.ok().entity(userDTOS).build();
     }
 
     @GET

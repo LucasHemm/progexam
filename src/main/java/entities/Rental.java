@@ -6,6 +6,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "rental")
+@NamedQueries({
+        @NamedQuery(name = "Rental.deleteAll", query = "delete from Rental r")
+})
 public class Rental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -109,6 +109,15 @@ public class User implements Serializable {
     this.job = job;
   }
 
+  public User(String userName, String userPass,List<Role> roleList, String name, String phone, String job) {
+    this.userName = userName;
+    this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+    this.roleList = roleList;
+    this.name = name;
+    this.phone = phone;
+    this.job = job;
+  }
+
   public User(String userName, String userPass,List<Role> roleList, String name, String phone, String job, Set<Rental> rentals) {
     this.userName = userName;
     this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
@@ -118,6 +127,7 @@ public class User implements Serializable {
     this.job = job;
     this.rentals = rentals;
   }
+
 
   @Override
   public String toString() {
