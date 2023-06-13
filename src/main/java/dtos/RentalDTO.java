@@ -19,11 +19,12 @@ public class RentalDTO {
     private String contactPerson;
     private HouseDTO houseDTO;
     private Set<String> userDTOs = new HashSet<>();
+    private Long id;
 
     public RentalDTO() {
     }
 
-    public RentalDTO(String startDate, String endDate, int priceAnnual, int deposit, String contactPerson, HouseDTO houseDTO, Set<UserDTO> userDTOs) {
+    public RentalDTO(String startDate, String endDate, int priceAnnual, int deposit, String contactPerson, HouseDTO houseDTO, Set<UserDTO> userDTOs,Long id) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.priceAnnual = priceAnnual;
@@ -33,6 +34,7 @@ public class RentalDTO {
         for(UserDTO userDTO : userDTOs){
             this.userDTOs.add(userDTO.getUserName());
         }
+        this.id = id;
     }
     public RentalDTO(Rental rental) {
         this.startDate = rental.getStartDate();
@@ -54,7 +56,7 @@ public class RentalDTO {
         for (Rental rental: rentals) {
             HouseDTO houseDTO = new HouseDTO(rental.getHouse());
             Set<UserDTO> userDTOs = rental.getUsers().stream().map(u -> new UserDTO(u)).collect(Collectors.toSet());
-            RentalDTO rentalDTO = new RentalDTO(rental.getStartDate(),rental.getEndDate(),rental.getPriceAnnual(),rental.getDeposit(),rental.getContactPerson(),houseDTO,userDTOs);
+            RentalDTO rentalDTO = new RentalDTO(rental.getStartDate(),rental.getEndDate(),rental.getPriceAnnual(),rental.getDeposit(),rental.getContactPerson(),houseDTO,userDTOs,rental.getId());
             rentalDTOs.add(rentalDTO);
         }
         return rentalDTOs;
@@ -122,6 +124,14 @@ public class RentalDTO {
 
     public void setUserDTOs(Set<String> userDTOs) {
         this.userDTOs = userDTOs;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
