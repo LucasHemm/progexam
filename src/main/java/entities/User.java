@@ -6,8 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @NamedQuery(name = "User.deleteAllRows", query = "DELETE from User ")
@@ -30,6 +29,50 @@ public class User implements Serializable {
     @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
   @ManyToMany
   private List<Role> roleList = new ArrayList<>();
+
+  @Column(name = "name", nullable = false)
+  private String name;
+
+  @Column(name = "phone", nullable = false)
+  private String phone;
+
+  @Column(name = "job", nullable = false)
+  private String job;
+
+  @ManyToMany(mappedBy = "users")
+  private Set<Rental> rentals = new LinkedHashSet<>();
+
+  public Set<Rental> getRentals() {
+    return rentals;
+  }
+
+  public void setRentals(Set<Rental> rentals) {
+    this.rentals = rentals;
+  }
+
+  public String getJob() {
+    return job;
+  }
+
+  public void setJob(String job) {
+    this.job = job;
+  }
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 
   public List<String> getRolesAsStrings() {
     if (roleList.isEmpty()) {
@@ -57,6 +100,13 @@ public class User implements Serializable {
     this.userName = userName;
     this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
     this.roleList = roleList;
+  }
+  public User(String userName, String userPass, String name, String phone, String job) {
+    this.userName = userName;
+    this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+    this.name = name;
+    this.phone = phone;
+    this.job = job;
   }
 
 
@@ -88,4 +138,16 @@ public class User implements Serializable {
     roleList.add(userRole);
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    User user = (User) o;
+    return userName != null && Objects.equals(userName, user.userName);
+  }
+
+  @Override
+  public int hashCode() {
+    return getClass().hashCode();
+  }
 }
