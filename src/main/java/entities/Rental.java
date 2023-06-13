@@ -49,6 +49,14 @@ public class Rental {
         this.house = house;
         this.users = users;
     }
+    public Rental(String startDate, String endDate, Integer priceAnnual, Integer deposit, String contactPerson, House house) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.priceAnnual = priceAnnual;
+        this.deposit = deposit;
+        this.contactPerson = contactPerson;
+        this.house = house;
+    }
 
 
     public House getHouse() {

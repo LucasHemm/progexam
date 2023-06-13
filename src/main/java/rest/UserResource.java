@@ -89,7 +89,14 @@ public class UserResource {
         return Response.ok().entity(udto).build();
     }
 
-
+    @GET
+    @Consumes
+    @Path("tenant/{username}")
+    public Response getUser(@PathParam("username") String username){
+        UserDTO udto = FACADE.getUser(username);
+        udto.setUserPass("********");
+        return Response.ok().entity(udto).build();
+    }
 
 
 

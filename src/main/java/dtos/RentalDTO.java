@@ -1,6 +1,11 @@
 package dtos;
 
+import entities.Rental;
+import entities.User;
+
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class RentalDTO {
 
@@ -23,6 +28,20 @@ public class RentalDTO {
         this.contactPerson = contactPerson;
         this.houseDTO = houseDTO;
         this.userDTOs = userDTOs;
+    }
+    public RentalDTO(Rental rental) {
+        this.startDate = rental.getStartDate();
+        this.endDate = rental.getEndDate();
+        this.priceAnnual = rental.getPriceAnnual();
+        this.deposit = rental.getDeposit();
+        this.contactPerson = rental.getContactPerson();
+        HouseDTO houseDTO = new HouseDTO(rental.getHouse());
+        this.houseDTO = houseDTO;
+        this.userDTOs = userDTOs;
+    }
+
+    public static List<RentalDTO> getDtos(List<Rental> rentals) {
+        return rentals.stream().map(r -> new RentalDTO(r)).collect(Collectors.toList());
     }
 
     public String getStartDate() {

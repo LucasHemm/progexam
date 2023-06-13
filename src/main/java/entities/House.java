@@ -24,6 +24,15 @@ public class House {
     @OneToMany(mappedBy = "house", orphanRemoval = true)
     private Set<Rental> rentals = new LinkedHashSet<>();
 
+    public House() {
+    }
+    public House(String address, String city, Integer numberOfRooms) {
+        this.address = address;
+        this.city = city;
+        this.numberOfRooms = numberOfRooms;
+    }
+
+
     public Set<Rental> getRentals() {
         return rentals;
     }

@@ -1,6 +1,8 @@
 package facades;
 
+import dtos.RentalDTO;
 import dtos.UserDTO;
+import entities.Rental;
 import entities.Role;
 import entities.User;
 import security.errorhandling.AuthenticationException;
@@ -39,7 +41,12 @@ public class RentalFacade {
     }
 
 
-
+    public List<RentalDTO> getAllRentals(){
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Rental> query = em.createQuery("SELECT r FROM Rental r", Rental.class);
+        List<Rental> rentals = query.getResultList();
+        return RentalDTO.getDtos(rentals);
+    }
 
 
 
